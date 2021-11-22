@@ -1,7 +1,4 @@
 import { Card, Container, Row, Button } from "react-bootstrap";
-import { AiFillHome } from 'react-icons/ai';
-import { FiUserPlus, FiUsers } from 'react-icons/fi';
-import { BiBookmark, BiBookmarks } from 'react-icons/bi';
 import { SideBarData } from '../components/Navbar/SidebarData';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
