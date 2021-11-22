@@ -18,7 +18,7 @@ function Navbar() {
             <nav className='nav-menu'>
                 <ul className="nav-menu-items">
                     <li key={0} className="nav-title">
-                        <Link to="#">
+                        <Link to="/">
                         <ImBooks />
                         <span>DSU Library</span>
                         </Link>
