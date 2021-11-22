@@ -1,11 +1,11 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 function CreateUser() {
     return (
         <div className="createUser">
             <div className="maindiv">
+                <h1>Create New User</h1>
                 <Form style={{ fontSize: '20px' }}>
                     <Form.Group className="mb-3" controlId="formBasicFirstName">
                         <Form.Label>First Name</Form.Label>
