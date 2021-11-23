@@ -26,7 +26,6 @@ function BookList() {
     function getBooks() {
         axios.get(`${APIURL}/book`)
             .then(res => {
-                console.log(res.data);
                 setBooks(res.data);
             })
             .catch(err => {
@@ -61,8 +60,6 @@ function BookList() {
             isAvailable
         }
 
-        console.log(updatedBook);
-
         axios.put(`${APIURL}/book/${isbn}`, updatedBook)
             .then(res => {
                 alert.success("Book updated successfully");
@@ -79,7 +76,19 @@ function BookList() {
     }
 
     function deleteBook() {
-
+        axios.delete(`${APIURL}/book/${isbn}`)
+            .then(res => {
+                alert.success("Book deleted successfully");
+                getBooks();
+                closeEdit();
+            })
+            .catch(err => {
+                if(err.response !== undefined){
+                    alert.error(`${err.response.status} - ${err.response.data.message}`);
+                }else{
+                    alert.error('Internal server error - Try again later')
+                }
+            });
     }
 
     return (
@@ -153,7 +162,7 @@ function BookList() {
                             <Form.Control type="text" placeholder="Enter book category" value={category} onChange={e => setCategory(e.target.value)} readOnly={!isUpdate} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCategory">
-                            <Form.Check type="checkbox" id={`default-checkbox`} label={`Available`} checked={isAvailable} onChange={() => setIsAvailable(!isAvailable)}/>
+                            <Form.Check type="checkbox" id={`default-checkbox`} label={`Available`} checked={isAvailable} onChange={() => setIsAvailable(!isAvailable)} disabled={!isUpdate}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
