@@ -32,7 +32,7 @@ function CreateUser() {
 
     function createNewUser() {
         const newUser = {
-            userCode,
+            userCode: userCode.toString().replaceAll(/\s/g,''),
             firstName,
             lastName,
             email,

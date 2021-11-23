@@ -15,7 +15,7 @@ function CreateBook() {
 
     function createNewBook() {
         const newBook = {
-            isbn, 
+            isbn: isbn.replaceAll(/\s/g,''), 
             author,
             title,
             category,
