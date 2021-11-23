@@ -31,7 +31,6 @@ function CreateUser() {
     }
 
     function createNewUser() {
-        console.log(firstName, lastName, email, phone, type);
         const newUser = {
             userCode,
             firstName,
@@ -44,7 +43,6 @@ function CreateUser() {
             }
         }
 
-        console.log(newUser);
         axios.post(`${APIURL}/user`, newUser)
             .then(res => {
                 alert.success("User created successfully");
@@ -60,7 +58,7 @@ function CreateUser() {
                 }else{
                     alert.error('Internal server error - Try again later')
                 }
-            })
+            });
     }
 
     return (
