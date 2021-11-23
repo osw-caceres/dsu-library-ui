@@ -1,7 +1,28 @@
-import React from 'react'
-import { Table, Button } from 'react-bootstrap'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Table } from 'react-bootstrap'
+import dateFormat from "dateformat";
+import APIURL from '../apiURL';
 
 function BookRecord() {
+
+    const [records, setRecords] = useState([]);
+
+    useEffect(() => {
+        getRecords();
+    }, []);
+
+    function getRecords() {
+        axios.get(`${APIURL}/bookRecord`)
+            .then(res => {
+                console.log(res.data);
+                setRecords(res.data);
+            })
+            .catch(err => {
+                alert.error("INTERNAL SERVER ERROR - Try again later")
+            });
+    }
+
     return (
         <div className="records">
             <div className="maindiv">
@@ -13,34 +34,29 @@ function BookRecord() {
                             <th>Transaction</th>
                             <th>Took Out</th>
                             <th>Due Date</th>
-                            <th>Returned</th>
+                            <th>Return Date</th>
                             <th>Renewal Count</th>
                             <th>Delay</th>
                             <th>Book ISBN</th>
                             <th>User Code</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>00001</td>
-                            <td>MM/dd/YYYY</td>
-                            <td>MM/dd/YYYY</td>
-                            <td>MM/dd/YYYY</td>
-                            <td>1</td>
-                            <td>--</td>
-                            <td>978-3-16-148410-0</td>
-                            <td>00001</td>
-                            <td>
-                                <Button variant="primary" type="submit">
-                                    Edit
-                                </Button>
-                                <Button variant="danger" type="submit">
-                                    Delete
-                                </Button>
-                            </td>
-                        </tr>
+                        {records.map((record, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{record.transaction}</td>
+                                    <td>{`${dateFormat(new Date(record.tookOn),"mm/dd/yyyy")}`}</td>
+                                    <td>{`${dateFormat(new Date(record.dueDate),"mm/dd/yyyy")}`}</td>
+                                    <td>{record.isReturned ? `${dateFormat(new Date(record.returnOn),"mm/dd/yyyy")}` : "Not returned"}</td>
+                                    <td>{record.renewalCont}</td>
+                                    <td>{record.delayPenalization}</td>
+                                    <td>{record.bookIsbn}</td>
+                                    <td>{record.userCode}</td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </Table>
             </div>

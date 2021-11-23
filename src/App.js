@@ -8,6 +8,7 @@ import BookList from "./pages/BookList";
 import BorrowBook from "./pages/BorrowBook";
 import ReturnBook from "./pages/ReturnBook";
 import BookRecord from "./pages/BookRecord";
+import RenewBook from "./pages/RenewBook"
 
 import './App.css'
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/book" element={<CreateBook />} />
           <Route path="/books" element={<BookList />} />
           <Route path="/borrow" element={<BorrowBook />} />
+          <Route path="/renew" element={<RenewBook />} />
           <Route path="/return" element={<ReturnBook />} />
           <Route path="/records" element={<BookRecord />} />
         </Routes>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiFillHome } from 'react-icons/ai';
 import { FiUserPlus, FiUsers } from 'react-icons/fi';
-import { BiBookmark, BiBookmarks } from 'react-icons/bi';
+import { BiBookmark, BiBookmarks, BiBookmarkPlus } from 'react-icons/bi';
 import { MdOutlineAssignmentReturn, MdOutlineAssignmentReturned } from 'react-icons/md';
 import { BsReceiptCutoff } from 'react-icons/bs'
 
@@ -40,6 +40,12 @@ export const SideBarData = [
         title: 'Borrow Book',
         path: '/borrow',
         icon: <MdOutlineAssignmentReturn />,
+        class: 'nav-text'
+    },
+    {
+        title: 'Renew Book',
+        path: '/renew',
+        icon: <BiBookmarkPlus />,
         class: 'nav-text'
     },
     {
