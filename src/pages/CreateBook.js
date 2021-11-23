@@ -19,7 +19,7 @@ function CreateBook() {
             author,
             title,
             category,
-            isAvailabe: true
+            isAvailable: true
         }
 
         axios.post(`${APIURL}/book`, newBook)
