@@ -50,6 +50,7 @@ function BookRecord() {
                 if(record.userCode.toString() === search){
                     return recordsItem(record, index);
                 }
+                return null;
             });
         }
     }

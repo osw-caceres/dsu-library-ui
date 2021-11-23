@@ -4,11 +4,6 @@ import { Form, Button } from 'react-bootstrap'
 import { useAlert } from 'react-alert';
 import APIURL from '../apiURL';
 
-Date.prototype.addWeeks = function(weeks) {
-    this.setDate(this.getDate() + weeks * 7);
-    return this;
-}
-
 function BorrowBook() {
 
     const alert = useAlert();
@@ -21,8 +16,6 @@ function BorrowBook() {
 
         const borrowData = {
             transaction,
-            tookOn: new Date().toISOString(),
-            dueDate: new Date().toISOString(),
             isReturned: false,
             renewalCont: 0,
             delayPenalization: 0
