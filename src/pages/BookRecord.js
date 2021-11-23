@@ -17,6 +17,7 @@ function BookRecord() {
     function getRecords() {
         axios.get(`${APIURL}/bookRecord`)
             .then(res => {
+                console.log(res.data);
                 setRecords(res.data);
             })
             .catch(err => {
@@ -33,7 +34,7 @@ function BookRecord() {
                 <td>{`${dateFormat(new Date(record.dueDate), "mm/dd/yyyy")}`}</td>
                 <td>{record.isReturned ? `${dateFormat(new Date(record.returnOn), "mm/dd/yyyy")}` : "Not returned"}</td>
                 <td>{record.renewalCont}</td>
-                <td>{record.delayPenalization}</td>
+                <td>{record.delayPenalization === null ? '--' : `$${record.delayPenalization.toFixed(2)}`}</td>
                 <td>{record.bookIsbn}</td>
                 <td>{record.userCode}</td>
             </tr>
