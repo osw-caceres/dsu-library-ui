@@ -21,9 +21,9 @@ function RenewBook() {
                 setTransaction('');
             })
             .catch(err => {
-                if(err.response !== undefined){
+                if (err.response !== undefined) {
                     alert.error(`${err.response.status} - ${err.response.data.message}`);
-                }else{
+                } else {
                     alert.error('Internal server error - Try again later')
                 }
             });

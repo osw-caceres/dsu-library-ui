@@ -22,7 +22,7 @@ function BorrowBook() {
         const borrowData = {
             transaction,
             tookOn: new Date().toISOString(),
-            dueDate: new Date().addWeeks(1).toISOString(),
+            dueDate: new Date().toISOString(),
             isReturned: false,
             renewalCont: 0,
             delayPenalization: 0
