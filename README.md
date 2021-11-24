@@ -1,2 +1,2 @@
 # dsu-library-ui
-Application Design Book Borrowinf API UI
+Application Design Book Borrowing API UI
