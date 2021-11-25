@@ -16,6 +16,7 @@ function UserList() {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [type, setType] = useState('');
+    const [isActive, setIsActive] = useState(false);
     const [borrowed, setBorrowed] = useState('');
     const [isUpdate, setIsUpdate] = useState(true);
     const [showEdit, setShowEdit] = useState(false);
@@ -55,6 +56,7 @@ function UserList() {
         setPhone(user.phone);
         setType(user.userTypeId);
         setBorrowed(user.borrowedBooks);
+        setIsActive(user.isActive);
         switchEdit();
     }
 
@@ -76,6 +78,7 @@ function UserList() {
             lastName,
             email,
             phone,
+            isActive,
             userType: {
                 userTypeId: type
             }
@@ -88,25 +91,25 @@ function UserList() {
                 closeEdit();
             })
             .catch(err => {
-                if(err.response !== undefined){
+                if (err.response !== undefined) {
                     alert.error(`${err.response.status} - ${err.response.data.message}`);
-                }else{
+                } else {
                     alert.error('Internal server error - Try again later')
                 }
             });
     }
 
     function deleteUser() {
-        axios.delete(`${APIURL}/user/${userCode}`)
+        axios.put(`${APIURL}/user/deactivate/${userCode}`)
             .then(res => {
-                alert.success("User deleted successfully");
+                alert.success("User deactivated successfully");
                 getUsers();
                 closeEdit();
             })
             .catch(err => {
-                if(err.response !== undefined){
+                if (err.response !== undefined) {
                     alert.error(`${err.response.status} - ${err.response.data.message}`);
-                }else{
+                } else {
                     alert.error('Internal server error - Try again later')
                 }
             });
@@ -127,6 +130,7 @@ function UserList() {
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Borrowed Books</th>
+                                <th>State</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -141,20 +145,25 @@ function UserList() {
                                         <td>{user.email}</td>
                                         <td>{user.phone}</td>
                                         <td>{user.borrowedBooks}</td>
+                                        <td>{user.isActive ? "Active" : "Deactivated"}</td>
                                         <td>
                                             <Button variant="primary" value={user} onClick={() => { setIsUpdate(true); openEdit(user) }}>
                                                 Edit
                                             </Button>
-                                            <Button variant="danger" value={user} onClick={() => { setIsUpdate(false); openEdit(user) }}>
-                                                Delete
-                                            </Button>
+                                            {user.isActive ?
+                                                <Button variant="danger" value={user} onClick={() => { setIsUpdate(false); openEdit(user) }}>
+                                                    Deactivate
+                                                </Button>
+                                                :
+                                                null
+                                            }
                                         </td>
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </Table>
-                    
+
                 </div>
             </div>
             <Modal show={showEdit} onHide={closeEdit}>
@@ -201,6 +210,9 @@ function UserList() {
                                 })}
                             </Form.Select>
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicCategory">
+                            <Form.Check type="checkbox" id={`default-checkbox`} label={`Active User`} checked={isActive} onChange={() => setIsActive(!isActive)} disabled={!isUpdate} />
+                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -214,7 +226,7 @@ function UserList() {
                         </Button>
                         :
                         <Button variant="danger" onClick={deleteUser}>
-                            Delete
+                            Deactivate
                         </Button>}
 
                 </Modal.Footer>
