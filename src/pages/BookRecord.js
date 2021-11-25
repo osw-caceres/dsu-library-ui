@@ -2,9 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Table, FormControl, Button, InputGroup } from 'react-bootstrap'
 import dateFormat from "dateformat";
+import { useAlert } from 'react-alert';
 import APIURL from '../apiURL';
 
 function BookRecord() {
+
+    const alert = useAlert();
 
     const [records, setRecords] = useState([]);
     const [searchBar, setSearchBar] = useState('');
